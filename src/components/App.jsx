@@ -5,7 +5,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
 import { Button } from './Button/Button';
 import { Modal } from './Modal/Modal';
-
+import css from './App.module.css';
 export class App extends Component {
   state = {
     images: [],
@@ -74,13 +74,10 @@ export class App extends Component {
   render() {
     const { images, isLoading, page, largeImageURL, showModal } = this.state;
     return (
-      <div className="app">
+      <div className={css.app}>
         <SearchBar onSubmit={this.onFormSubmit} />
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <ImageGallery images={images} openModal={this.openModal} />
-        )}
+        <ImageGallery images={images} openModal={this.openModal} />
+        {isLoading && <Loader />}
         {!isLoading && images.length !== 0 && (
           <Button onLoadMore={this.onLoadMore} page={page} />
         )}
